@@ -1,8 +1,27 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type ContributionDay = {
   date: string;
   count: number;
+};
+
+type GraphQLContributionResponse = {
+  data?: {
+    user?: {
+      contributionsCollection?: {
+        contributionCalendar?: {
+          weeks?: Array<{
+            contributionDays?: Array<{
+              date: string;
+              contributionCount: number;
+            }>;
+          }>;
+        };
+      };
+    };
+  };
 };
 
 const USERNAME = "Hawariii";
@@ -49,7 +68,7 @@ async function fetchJson<T>(url: string, token?: string): Promise<T> {
 
   const response = await fetch(url, {
     headers,
-    next: { revalidate: 1800 },
+    cache: "no-store",
   });
 
   if (!response.ok) {
@@ -69,7 +88,7 @@ async function fetchContributionsYear(
   const response = await fetch(
     `https://github.com/users/${username}/contributions?from=${from}&to=${to}`,
     {
-      next: { revalidate: 1800 },
+      cache: "no-store",
     },
   );
 
@@ -80,14 +99,75 @@ async function fetchContributionsYear(
   return parseContributionSvg(await response.text());
 }
 
+async function fetchContributionsYearGraphQL(
+  username: string,
+  year: number,
+  token: string,
+): Promise<ContributionDay[]> {
+  const from = `${year}-01-01T00:00:00Z`;
+  const to = `${year}-12-31T23:59:59Z`;
+
+  const query = `
+    query ContributionsByYear($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
+        contributionsCollection(from: $from, to: $to) {
+          contributionCalendar {
+            weeks {
+              contributionDays {
+                date
+                contributionCount
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const response = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+    body: JSON.stringify({
+      query,
+      variables: {
+        login: username,
+        from,
+        to,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`GraphQL fetch failed: ${response.status}`);
+  }
+
+  const result = (await response.json()) as GraphQLContributionResponse;
+
+  const weeks =
+    result.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? [];
+
+  return weeks.flatMap((week) =>
+    (week.contributionDays ?? []).map((day) => ({
+      date: day.date,
+      count: day.contributionCount,
+    })),
+  );
+}
+
 export async function GET() {
   try {
     const token = process.env.GITHUB_TOKEN;
 
-    const [user, repos, contributions2025, contributions2026] = await Promise.all([
+    const [user, repos] = await Promise.all([
       fetchJson<{
         name: string | null;
         login: string;
+        avatar_url: string;
         public_repos: number;
         followers: number;
       }>(`https://api.github.com/users/${USERNAME}`, token),
@@ -102,8 +182,33 @@ export async function GET() {
           archived: boolean;
         }>
       >(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`, token),
-      fetchContributionsYear(USERNAME, YEARS[0]),
-      fetchContributionsYear(USERNAME, YEARS[1]),
+    ]);
+
+    const contributionFetcher = async (year: number): Promise<ContributionDay[]> => {
+      if (!token) {
+        return fetchContributionsYear(USERNAME, year);
+      }
+
+      try {
+        const graphQLDays = await fetchContributionsYearGraphQL(
+          USERNAME,
+          year,
+          token,
+        );
+
+        if (graphQLDays.length > 0) {
+          return graphQLDays;
+        }
+      } catch {
+        // Fall back to public contributions endpoint.
+      }
+
+      return fetchContributionsYear(USERNAME, year);
+    };
+
+    const [contributions2025, contributions2026] = await Promise.all([
+      contributionFetcher(YEARS[0]),
+      contributionFetcher(YEARS[1]),
     ]);
 
     const nonForkRepos = repos.filter((repo) => !repo.fork && !repo.archived);
@@ -189,6 +294,7 @@ export async function GET() {
       user: {
         name: user.name ?? user.login,
         login: user.login,
+        avatarUrl: user.avatar_url,
         publicRepos: user.public_repos,
       },
       stats: {
@@ -204,6 +310,7 @@ export async function GET() {
       contributions,
       years: [2025, 2026],
       usesToken: Boolean(token),
+      contributionSource: token ? "graphql_or_public_fallback" : "public_only",
     });
   } catch {
     return NextResponse.json(
