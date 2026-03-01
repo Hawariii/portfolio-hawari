@@ -1,61 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#dashboard", label: "Dashboard" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/85 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#home" className="text-base font-semibold tracking-wide text-white">
+          HawariiDev
+        </a>
 
-        {/* Logo */}
-        <Link href="/" className="font-bold text-lg text-white tracking-tight">
-          hawari<span className="text-purple-400">.dev</span>
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
-          <Link href="#about" className="hover:text-white transition-colors">About</Link>
-          <Link href="#projects" className="hover:text-white transition-colors">Projects</Link>
-          <Link href="#contact" className="hover:text-white transition-colors">Contact</Link>
-          
-        <a href="https://github.com/Hawariii"
+        <div className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
+          {links.map((link) => (
+            <a key={link.href} href={link.href} className="transition hover:text-white">
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="https://github.com/Hawariii"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-1.5 rounded-full border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all"
-        >
+            className="rounded-full border border-white/30 px-4 py-1.5 text-xs uppercase tracking-widest text-white transition hover:border-white hover:bg-white hover:text-black"
+          >
             GitHub
           </a>
         </div>
 
-        {/* Mobile Hamburger */}
         <button
-          className="md:hidden text-gray-400 hover:text-white"
-          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          className="text-sm text-zinc-300 md:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-label="Toggle navigation"
         >
-          {isOpen ? "✕" : "☰"}
+          {open ? "Close" : "Menu"}
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden px-6 pb-4 flex flex-col gap-4 text-sm text-gray-400 border-t border-white/10 pt-4">
-          <Link href="#about" onClick={() => setIsOpen(false)} className="hover:text-white transition-colors">About</Link>
-          <Link href="#projects" onClick={() => setIsOpen(false)} className="hover:text-white transition-colors">Projects</Link>
-          <Link href="#contact" onClick={() => setIsOpen(false)} className="hover:text-white transition-colors">Contact</Link>
-          
-          <a href="https://github.com/Hawariii"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-purple-400"
-            onClick={() => setIsOpen(false)}
-          >
-            GitHub →
-          </a>
+      {open && (
+        <div className="border-t border-white/10 bg-black/95 px-6 py-4 md:hidden">
+          <div className="flex flex-col gap-4 text-sm text-zinc-300">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="transition hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="https://github.com/Hawariii"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

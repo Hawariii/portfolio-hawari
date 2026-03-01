@@ -1,66 +1,49 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const skills = [
-  "Next.js", "React", "TypeScript", "Laravel",
-  "PHP", "MySQL", "Tailwind CSS", "MCPE/BE (Minecraft)",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "React",
+  "Node.js",
+  "Laravel",
+  "MySQL",
+  "REST API",
+  "GitHub Actions",
+  "Vercel",
 ];
 
 export default function About() {
   return (
-    <section id="about" className="bg-black py-24 px-6 border-t border-white/10">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-
-        {/* Text */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-purple-400 text-sm font-medium tracking-widest uppercase mb-4 block">
-            About Me
-          </span>
-          <h2 className="text-4xl font-bold text-white mb-6 leading-tight">
-            Programmer yang suka<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
-              bikin hal keren
-            </span>
+    <section id="about" className="border-t border-white/10 px-6 py-24">
+      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2">
+        <div>
+          <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">About</p>
+          <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">
+            Profil singkat HawariiDev
           </h2>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            Gw Hawari, programmer asal Indonesia yang fokus di web development
-            dari skala kecil sampai project industri. Gw seneng bangun sesuatu
-            dari nol sampai jadi produk yang beneran bisa dipakai.
+          <p className="mt-6 text-sm leading-relaxed text-zinc-400 md:text-base">
+            Saya programmer dari Indonesia yang fokus di fullstack web development.
+            Skill utama saya ada di Next.js, TypeScript, dan Laravel untuk membangun
+            aplikasi yang scalable dan siap dipakai secara real.
           </p>
-          <p className="text-gray-400 leading-relaxed">
-            Di luar web, gw juga aktif di komunitas Minecraft sebagai Creator —
-            bikin addon dan texture pack yang udah dinikmatin banyak player.
+          <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
+            Selain website, saya juga aktif membuat addon dan resource pack Minecraft
+            Bedrock. Pengalaman ini bantu saya menjaga detail UX dan performa produk.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Skills */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-purple-400 text-sm font-medium tracking-widest uppercase mb-4 block">
-            Tech Stack
-          </span>
-          <div className="flex flex-wrap gap-3">
+        <div>
+          <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">Skills</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {skills.map((skill) => (
-              <span
+              <div
                 key={skill}
-                className="px-4 py-2 rounded-full border border-purple-400/30 bg-purple-400/10 text-purple-300 text-sm hover:bg-purple-400/20 transition-all"
+                className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs text-zinc-200 sm:text-sm"
               >
                 {skill}
-              </span>
+              </div>
             ))}
           </div>
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );

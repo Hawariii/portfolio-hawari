@@ -1,60 +1,64 @@
 {
-  "web": [
+  "projects": [
     {
       "id": 1,
       "title": "ITbantex",
-      "description": "Project industri web app untuk manajemen IT.",
-      "tech": ["Laravel", "PHP", "MySQL"],
-      "github": "https://github.com/Hawariii/ITbantex",
-      "live": "",
-      "image": "/images/itbantex.png"
-    }
-  ],
-  "minecraft": [
-    {
-      "id": 1,
-      "title": "opFishing",
-      "description": "Make fishing in Minecraft overpowered! Catch rare items like enchanted books, diamonds, and more with just a fishing rod.",
-      "type": "Addon",
-      "version": "1.26",
-      "curseforge": "https://www.curseforge.com/minecraft-bedrock/addons/opfishing",
-      "image": "/images/opfishing.png"
+      "description": "Aplikasi manajemen IT untuk kebutuhan operasional internal perusahaan.",
+      "category": "web",
+      "stack": ["Laravel", "PHP", "MySQL"],
+      "image": "/images/itbantex.png",
+      "links": {
+        "github": "https://github.com/Hawariii/ITbantex"
+      }
     },
     {
       "id": 2,
-      "title": "3D white outline",
-      "description": "Clean 3D white outline textures for Minecraft — gives every block and item a stylish glowing edge!",
-      "type": "Resourcepack",
-      "version": "1.26",
-      "curseforge": "https://www.curseforge.com/minecraft-bedrock/texture-packs/white-3d-outline",
-      "image": "/images/3d-white-outline.png"
+      "title": "opFishing",
+      "description": "Addon Minecraft Bedrock yang membuat mekanik fishing lebih rewarding dan fun.",
+      "category": "minecraft",
+      "stack": ["Minecraft Addon", "Behavior Pack", "JSON"],
+      "image": "/images/opfishing.png",
+      "links": {
+        "publish": "https://www.curseforge.com/minecraft-bedrock/addons/opfishing"
+      }
     },
     {
-      "id":3,
-      "title":"Easy to get elytra",
-      "description":"Elytra is a rare item in Minecraft that allows players to glide through the air. With this addon, you can easily obtain elytra without the usual challenges of finding them in end cities.",
-      "type":"Addon",
-      "version":"1.26",
-      "curseforge":"",
-      "image":"/images/easy-elytra.png"
+      "id": 3,
+      "title": "3D White Outline",
+      "description": "Resource pack dengan style outline putih 3D untuk meningkatkan keterbacaan visual.",
+      "category": "minecraft",
+      "stack": ["Resource Pack", "Texture", "Minecraft"],
+      "image": "/images/3d-white-outline.png",
+      "links": {
+        "publish": "https://www.curseforge.com/minecraft-bedrock/texture-packs/white-3d-outline"
+      }
     },
     {
-      "id":4,
-      "title":"X-ray by Aizhu",
-      "description":"",
-      "type":"Resourcepack",
-      "version":"1.26",
-      "curseforge":"",
-      "image":"/images/xray.png"
+      "id": 4,
+      "title": "Easy To Get Elytra",
+      "description": "Addon utility untuk mempermudah pemain mendapatkan elytra tanpa grinding panjang.",
+      "category": "minecraft",
+      "stack": ["Minecraft Addon", "Gameplay", "JSON"],
+      "image": "/images/placeholder-project.svg",
+      "links": {}
     },
     {
-      "id":5,
-      "title":"Hardcore heart",
-      "description": "",
-      "type":"Resourcepack",
-      "version":"1.26",
-      "curseforge":"",
-      "image":"/images/hardcore-heart.png"
+      "id": 5,
+      "title": "X-Ray by Aizhu",
+      "description": "Resource pack eksperimental untuk membantu eksplorasi material tertentu.",
+      "category": "minecraft",
+      "stack": ["Resource Pack", "Texture", "Minecraft"],
+      "image": "/images/placeholder-project.svg",
+      "links": {}
+    },
+    {
+      "id": 6,
+      "title": "Hardcore Heart",
+      "description": "Paket texture UI untuk nuansa hardcore dengan ikon heart yang custom.",
+      "category": "minecraft",
+      "stack": ["UI Texture", "Resource Pack", "Minecraft"],
+      "image": "/images/placeholder-project.svg",
+      "links": {}
     }
   ]
 }

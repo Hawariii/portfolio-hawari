@@ -1,67 +1,35 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-black flex items-center justify-center px-6">
-      <div className="max-w-5xl mx-auto text-center">
+    <section
+      id="home"
+      className="relative overflow-hidden border-b border-white/10 px-6 pb-20 pt-36 md:pb-28 md:pt-44"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_35%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_35%)]" />
+      <div className="relative mx-auto max-w-6xl">
+        <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">Portfolio 2026</p>
+        <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-white md:text-7xl">
+          Hawariii
+          <span className="block text-zinc-300">Web Developer & Product Builder</span>
+        </h1>
+        <p className="mt-7 max-w-2xl text-sm leading-relaxed text-zinc-400 md:text-lg">
+          Saya bangun web app yang fokus ke performa, desain profesional, dan user
+          experience yang jelas. Dari MVP sampai production system.
+        </p>
 
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-block mb-6 px-4 py-1.5 rounded-full border border-purple-400/30 bg-purple-400/10 text-purple-400 text-sm"
-        >
-          Web Developer & Minecraft Creator
-        </motion.div>
-
-        {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
-        >
-          Halo, gw{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
-            Hawari
-          </span>
-        </motion.h1>
-
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          Programmer dari Indonesia yang suka bikin web dari skala kecil sampai besar,
-          sekaligus aktif bikin addons & texture pack Minecraft.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          
-            <a href="#projects"
-            className="px-8 py-3 rounded-full bg-purple-500 hover:bg-purple-600 text-white font-medium transition-all"
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a
+            href="#projects"
+            className="rounded-full border border-white bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-zinc-200"
           >
-            Lihat Projects
+            Lihat Project
           </a>
-          
-            <a href="#minecraft"
-            className="px-8 py-3 rounded-full border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black font-medium transition-all"
+          <a
+            href="#dashboard"
+            className="rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white transition hover:border-white"
           >
-            Minecraft Works
+            Buka Dashboard GitHub
           </a>
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );
