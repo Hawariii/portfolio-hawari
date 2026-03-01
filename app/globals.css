@@ -24,3 +24,29 @@ body {
     Arial,
     sans-serif;
 }
+
+.section-wrap {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 6rem 1.5rem;
+}
+
+.bg-surface {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.bg-subtle {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.border-border {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.text-muted {
+  color: #8a8a8a;
+}
+
+.text-soft {
+  color: #c7c7c7;
+}
