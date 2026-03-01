@@ -1,9 +1,32 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+
+type HeroGitHubProfile = {
+  user: {
+    name: string;
+    login: string;
+    avatarUrl: string;
+  };
+};
 
 export default function Hero() {
   const currentYear = new Date().getFullYear();
+  const [profile, setProfile] = useState<HeroGitHubProfile["user"] | null>(null);
+
+  useEffect(() => {
+    fetch("/api/github", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("failed");
+        return response.json() as Promise<HeroGitHubProfile>;
+      })
+      .then((data) => setProfile(data.user))
+      .catch(() => {
+        setProfile(null);
+      });
+  }, []);
 
   return (
     <motion.section
@@ -43,6 +66,31 @@ export default function Hero() {
           Saya bangun web app yang fokus ke performa, desain profesional, dan user
           experience yang jelas. Dari MVP sampai production system.
         </motion.p>
+
+        {profile && (
+          <motion.a
+            href={`https://github.com/${profile.login}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 transition hover:border-white/30"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.45 }}
+          >
+            <Image
+              src={profile.avatarUrl}
+              alt={profile.login}
+              width={38}
+              height={38}
+              className="rounded-full border border-white/20"
+              unoptimized
+            />
+            <div className="leading-tight">
+              <p className="text-sm font-medium text-white">{profile.name}</p>
+              <p className="font-mono text-[11px] text-zinc-500">@{profile.login}</p>
+            </div>
+          </motion.a>
+        )}
 
         <motion.div
           className="mt-10 flex flex-wrap gap-3"
