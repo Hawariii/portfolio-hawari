@@ -148,7 +148,7 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="underline decoration-zinc-600 underline-offset-4 transition hover:text-white"
                       >
-                        Demo
+                        View Demo
                       </a>
                     )}
                   </div>

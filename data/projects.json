@@ -59,6 +59,18 @@
       "stack": ["UI Texture", "Resource Pack", "Minecraft"],
       "image": "/images/placeholder-project.svg",
       "links": {}
+    },
+    {
+      "id": 7,
+      "title": "Caffee Demo",
+      "description": "Contoh web UMKM caffee web landing page dengan tampilan profesional.",
+      "category": "web",
+      "stack": ["Typescript", "Nextjs", "Tailwind"],
+      "image": "/images/coffedemo.png",
+      "links": {
+        "github": "https://github.com/Hawariii/coffeeshop-demo-web.git",
+        "demo": "https://coffeeshop-demo-omega.vercel.app"
+      }
     }
   ]
 }
