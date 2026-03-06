@@ -62,7 +62,7 @@
     },
     {
       "id": 7,
-      "title": "Caffee Demo",
+      "title": "Cafe Demo",
       "description": "Contoh web UMKM caffee web landing page dengan tampilan profesional.",
       "category": "web",
       "stack": ["Typescript", "Nextjs", "Tailwind"],
@@ -70,6 +70,18 @@
       "links": {
         "github": "https://github.com/Hawariii/coffeeshop-demo-web.git",
         "demo": "https://coffeeshop-demo-omega.vercel.app"
+      }
+    },
+    {
+      "id": 8,
+      "title": "Cakeshop Demo",
+      "description": "Contoh Website UMKM Landing-page dengan tampilan profesional.",
+      "category": "web",
+      "stack": ["TypeScript","Nextjs","Tailwind"],
+      "image": "/images/cakedemo.png",
+      "links": {
+        "github": "https://github.com/Hawariii/cakeshop-demo-web",
+        "demo": "https://cakeshop-demo-web.vercel.app"
       }
     }
   ]
