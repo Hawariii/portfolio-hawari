@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": 1,
-      "title": "ITbantex",
+      "title": "Web Purchasing items",
       "description": "Aplikasi manajemen IT untuk kebutuhan operasional internal perusahaan.",
       "category": "web",
       "stack": ["Laravel", "PHP", "MySQL"],
@@ -68,8 +68,8 @@
       "stack": ["Typescript", "Nextjs", "Tailwind"],
       "image": "/images/coffedemo.png",
       "links": {
-        "github": "https://github.com/Hawariii/coffeeshop-demo-web.git",
-        "demo": "https://coffeeshop-demo-omega.vercel.app"
+        "github": "https://github.com/Hawariii/mosac-space-and-coffee",
+        "view": "https://mosac-cafe-demo.vercel.app/"
       }
     },
     {
@@ -81,7 +81,19 @@
       "image": "/images/cakedemo.png",
       "links": {
         "github": "https://github.com/Hawariii/cakeshop-demo-web",
-        "demo": "https://cakeshop-demo-web.vercel.app"
+        "view": "https://cakeshop-demo-web.vercel.app"
+      }
+    },
+    {
+      "id": 8,
+      "title": "E-commerce",
+      "description": "Contoh Website E-commerce dengan tampilan sederhana.",
+      "category": "web",
+      "stack": ["TypeScript","Nextjs","Tailwind","Prisma"],
+      "image": "/images/eco.png",
+      "links": {
+        "github": "https://github.com/Hawariii/ecommerce",
+        "view": "https://cakeshop-demo-web.vercel.app"
       }
     }
   ]
